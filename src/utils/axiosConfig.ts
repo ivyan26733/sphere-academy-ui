@@ -1,8 +1,8 @@
 
 import axios from 'axios';
 
-// Set base URL for all API calls
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+// Set base URL for all API calls - using Vite's env syntax
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 // Request interceptor to add auth token
 axios.interceptors.request.use(
