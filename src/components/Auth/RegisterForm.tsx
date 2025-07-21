@@ -7,10 +7,11 @@ import { Eye, EyeOff, BookOpen, User, GraduationCap } from 'lucide-react';
 const RegisterForm: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '',
-    lastName: '',
+    address: '',
     email: '',
     password: '',
     confirmPassword: '',
+    phoneNumber: '',
     role: 'STUDENT' as 'STUDENT' | 'INSTRUCTOR'
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +34,7 @@ const RegisterForm: React.FC = () => {
     }
 
     try {
-      await register(formData.email, formData.password, formData.role, formData.firstName, formData.lastName);
+      await register(formData.email, formData.password, formData.role, formData.firstName,formData.address,formData.phoneNumber);
       navigate(formData.role === 'INSTRUCTOR' ? '/instructor/dashboard' : '/student/dashboard');
     } catch (error: any) {
       setError(error.response?.data?.message || 'Registration failed. Please try again.');
@@ -74,7 +75,7 @@ const RegisterForm: React.FC = () => {
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 ">
                   First Name
                 </label>
                 <input
@@ -88,7 +89,7 @@ const RegisterForm: React.FC = () => {
                   placeholder="First name"
                 />
               </div>
-              <div>
+              {/* <div>
                 <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
                   Last Name
                 </label>
@@ -97,12 +98,12 @@ const RegisterForm: React.FC = () => {
                   name="lastName"
                   type="text"
                   required
-                  value={formData.lastName}
+                  value={formData.address}
                   onChange={handleChange}
                   className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                   placeholder="Last name"
                 />
-              </div>
+              </div> */}
             </div>
 
             <div>
@@ -150,6 +151,38 @@ const RegisterForm: React.FC = () => {
                 onChange={handleChange}
                 className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                 placeholder="Enter your email"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                Address
+              </label>
+              <input
+                id="address"
+                name="address"
+                type="address"
+                required
+                value={formData.address}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                placeholder="Enter your Address"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700">
+                Contact Number
+              </label>
+              <input
+                id="phoneNumber"
+                name="phoneNumber"
+                type="phoneNumber"
+                required
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                className="mt-1 block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                placeholder="Enter your phone Number"
               />
             </div>
 

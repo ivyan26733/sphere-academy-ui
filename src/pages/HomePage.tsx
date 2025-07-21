@@ -75,6 +75,10 @@ const HomePage: React.FC = () => {
       setCourses(mockCourses);
       setLoading(false);
     }, 1000);
+    const fetchCoursesList = () =>{
+      
+    }
+    fetchCoursesList();
   }, []);
 
   const filteredCourses = courses.filter(course => {

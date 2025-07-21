@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Set base URL for all API calls - using Vite's env syntax
-axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:8100';
 
 // Request interceptor to add auth token
 axios.interceptors.request.use(

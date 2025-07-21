@@ -6,8 +6,7 @@ interface User {
   id: string;
   email: string;
   role: 'STUDENT' | 'INSTRUCTOR';
-  firstName?: string;
-  lastName?: string;
+  userName?: string;
   profileImageUrl?: string;
 }
 
@@ -15,7 +14,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, role: 'STUDENT' | 'INSTRUCTOR', firstName: string, lastName: string) => Promise<void>;
+  register: (email: string, password: string, role: 'STUDENT' | 'INSTRUCTOR', firstName: string, address: string,phoneNumber:string) => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -53,8 +52,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
-      const { token: authToken, user: userData } = response.data;
+      const response = await axios.post('/api/public/auth/login', { userEmail:email, userPassword:password });
+      const { token: authToken, user: userData } = response.data.data;
       
       setToken(authToken);
       setUser(userData);
@@ -69,16 +68,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async (email: string, password: string, role: 'STUDENT' | 'INSTRUCTOR', firstName: string, lastName: string) => {
+  const register = async (email: string, password: string, role: 'STUDENT' | 'INSTRUCTOR', userName: string, address: string,phoneNumber:string) => {
     try {
-      const response = await axios.post('/api/auth/register', {
-        email,
-        password,
+      const response = await axios.post('/api/public/auth/register', {
+        
+        userEmail:email,
+        userPassword:password,
         role,
-        firstName,
-        lastName
+        address,
+        userName,
+        phoneNumber
       });
-      const { token: authToken, user: userData } = response.data;
+      const { token: authToken, user: userData } = response.data.data;
       
       setToken(authToken);
       setUser(userData);
